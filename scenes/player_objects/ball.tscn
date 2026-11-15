@@ -6,6 +6,10 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4kxuq"]
 bounce = 0.5
 
+[sub_resource type="Gradient" id="Gradient_y1aif"]
+offsets = PackedFloat32Array(0, 0.5, 0.501, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4kxuq"]
 radius = 32.0
 
@@ -25,6 +29,8 @@ sharp_limit = 0.0
 points = PackedVector2Array(0, 0, 155, 106)
 width = 8.0
 default_color = Color(0, 1, 0, 1)
+gradient = SubResource("Gradient_y1aif")
+texture_mode = 1
 end_cap_mode = 2
 sharp_limit = 0.0
 
