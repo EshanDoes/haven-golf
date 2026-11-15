@@ -7,6 +7,52 @@
 [ext_resource type="PackedScene" uid="uid://cjv0quraql88e" path="res://scenes/obstacles/enemy.tscn" id="4_f00r8"]
 [ext_resource type="Texture2D" uid="uid://cs42ac3d2unbg" path="res://sprites/flag.png" id="6_4o7q8"]
 
+[sub_resource type="Shader" id="Shader_kpjit"]
+code = "shader_type canvas_item;
+
+// Original shader by DimensionAlmios, can be found here: https://godotshaders.com/shader/wind-sway-for-foliage-and-flags/
+// Wind sway for foliage, flags, hair and banners. The top of the sprite sways
+// most; the bottom row stays anchored.
+uniform float strength : hint_range(0.0, 0.5) = 0.04;
+uniform float speed : hint_range(0.0, 6.0) = 2.0;
+uniform vec2 sheet_frames = vec2(1.0, 1.0);   // a sprite sheet: its hframes and vframes, so the effect works per frame
+// 0: every sprite sways in step. Up to 1: each one is shifted in time by its place in the
+// world, so a row of bushes does not sway as one
+uniform float position_phase : hint_range(0.0, 1.0) = 0.0;
+
+varying vec4 vertex_tint;   // modulate and self_modulate, applied at the end
+varying float phase;
+
+void vertex() {
+	vertex_tint = COLOR;
+	phase = MODEL_MATRIX[3].x * 0.02 * position_phase;
+}
+
+void fragment() {
+	// the frame of a sprite sheet (1 x 1: the whole texture, as before)
+	vec2 cell = min(floor(UV * sheet_frames), sheet_frames - 1.0);
+	vec2 uv = UV * sheet_frames - cell;
+	// (a whole number of turns per hour: no jump when TIME starts again every hour)
+	float sp = round(speed * 3600.0 / TAU) * TAU / 3600.0;
+	float sway = sin(TIME * sp + uv.y * 3.0 + phase) * strength * (1.0 - uv.y);
+	uv.x += sway;
+	COLOR = texture(TEXTURE, (cell + uv) / sheet_frames);
+	// what sways past the side of the frame is empty, not a smear of its edge column (or
+	// the frame next door)
+	// (faded over a pixel, not cut: a sprite opaque up to its side keeps a smooth edge)
+	float px = fwidth(uv.x) + 1e-5;
+	COLOR.a *= smoothstep(-px, 0.0, uv.x) * (1.0 - smoothstep(1.0, 1.0 + px, uv.x));
+	COLOR *= vertex_tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4o7q8"]
+shader = SubResource("Shader_kpjit")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 1.5000000712500001
+shader_parameter/sheet_frames = Vector2(1, 0.15)
+shader_parameter/position_phase = 0.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxuq"]
 size = Vector2(100, 250)
 
@@ -55,6 +101,7 @@ position = Vector2(-1162, -2038)
 collision_layer = 16
 
 [node name="Sprite" type="Sprite2D" parent="Flag" unique_id=1365046142]
+material = SubResource("ShaderMaterial_4o7q8")
 texture = ExtResource("6_4o7q8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flag" unique_id=471574946]

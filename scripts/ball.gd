@@ -43,7 +43,7 @@ func _physics_process(delta):
 	club.get_node("Sprite").rotation_degrees = -15 + (45 + launch_strength / launch_affecting_club) * (1 - spin_timer.time_left * 2)
 	if score != 0 and !win:
 		score += delta
-		score_text.text = "Score: " + str(round(score*100)/100)
+		score_text.text = "Score: " + str(snapped(score, 0.01))
 
 func _input(event):
 	if event.is_action_pressed("click") and !is_dashing and !win:
@@ -81,7 +81,19 @@ func _on_body_entered(body: Node2D):
 		elif body.get_collision_layer_value(5):
 			win = true
 			score_text.visible = false
-			win_text.text = "You win!\nFinal score: "+str(round(score*100)/100)
+			win_text.text += str(snapped(score, 0.01))
+			if score > 1:
+				win_text.text += "\nBogey x" + str(roundi(score))
+			elif score > 0:
+				win_text.text += "\nPar"
+			elif score > -1:
+				win_text.text += "\nBirdie"
+			elif score > -2:
+				win_text.text += "\nEagle"
+			elif score > -3:
+				win_text.text += "\nDouble Eagle"
+			else:
+				win_text.text += "\nCondor"
 			win_text.visible = true
 
 func _on_spin_timeout() -> void:
