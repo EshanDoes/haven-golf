@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d12w8xn14gs0k"]
+
+[ext_resource type="Script" uid="uid://1jr4kdlxkm10" path="res://scripts/landenemy.gd" id="1_l71me"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxuq"]
+size = Vector2(80, 80)
+
+[node name="Land Enemy" type="CharacterBody2D" unique_id=296811441]
+collision_layer = 12
+collision_mask = 15
+script = ExtResource("1_l71me")
+move_speed = 200.0
+gravity = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=507285359]
+shape = SubResource("RectangleShape2D_4kxuq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=763747676]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)
+
+[node name="Turn Cooldown" type="Timer" parent="." unique_id=2013184005]
+wait_time = 0.1
+one_shot = true

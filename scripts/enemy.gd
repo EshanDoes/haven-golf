@@ -1,6 +1,10 @@
 extends CharacterBody2D
 
 @export var move_speed = 10.0
+@export var distance_until_visible = 2500
 
 func _physics_process(delta: float) -> void:
-	var collider = move_and_collide(($"../Ball".position - position).normalized() * move_speed)
+	var movement_coordinates = Vector2(0, 0)
+	if abs($"../Ball".position - position) <= Vector2(distance_until_visible, 1000):
+		movement_coordinates = $"../Ball".position - position
+	var collider = move_and_collide(movement_coordinates.normalized() * move_speed)
