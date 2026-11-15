@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://x31lyk3l8ar7" path="res://sprites/ball.png" id="2_y1aif"]
 [ext_resource type="Texture2D" uid="uid://bubl1aaerjuxo" path="res://sprites/dash.png" id="3_w5iks"]
 [ext_resource type="Texture2D" uid="uid://dejvjd6ubwfff" path="res://sprites/club.png" id="4_1aes7"]
+[ext_resource type="FontFile" uid="uid://c4qwpkjkallhi" path="res://fonts/GILSANUB.TTF" id="4_bddyc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4kxuq"]
 bounce = 0.5
@@ -92,16 +93,15 @@ gradient = SubResource("Gradient_y1aif")
 [sub_resource type="CircleShape2D" id="CircleShape2D_4kxuq"]
 radius = 32.0
 
-[sub_resource type="SystemFont" id="SystemFont_mti6b"]
-font_names = PackedStringArray("Snap ITC", "Lucida Sans")
-
 [sub_resource type="LabelSettings" id="LabelSettings_4kxuq"]
-font = SubResource("SystemFont_mti6b")
+font = ExtResource("4_bddyc")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_1aes7"]
-font = SubResource("SystemFont_mti6b")
+font = ExtResource("4_bddyc")
 font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Ball" type="RigidBody2D" unique_id=987841902]
 top_level = true
@@ -170,20 +170,22 @@ one_shot = true
 [node name="Target Raycasts" type="Node2D" parent="." unique_id=315210116]
 
 [node name="Left Ray" type="RayCast2D" parent="Target Raycasts" unique_id=316010106]
-position = Vector2(-50, 0)
+position = Vector2(-75, 0)
 target_position = Vector2(0, 1000)
 collision_mask = 12
 
 [node name="Right Ray" type="RayCast2D" parent="Target Raycasts" unique_id=1142044865]
-position = Vector2(50, 0)
+position = Vector2(75, 0)
 target_position = Vector2(0, 1000)
 collision_mask = 12
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=852310592]
 
 [node name="Score" type="Label" parent="UI" unique_id=1861093719]
-offset_right = 376.0
-offset_bottom = 63.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 386.0
+offset_bottom = 73.0
 text = "Score: 0.00"
 label_settings = SubResource("LabelSettings_4kxuq")
 

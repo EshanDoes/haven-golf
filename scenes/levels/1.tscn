@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d12w8xn14gs0k" path="res://scenes/obstacles/landenemy.tscn" id="3_f00r8"]
 [ext_resource type="PackedScene" uid="uid://cjv0quraql88e" path="res://scenes/obstacles/enemy.tscn" id="4_f00r8"]
 [ext_resource type="Texture2D" uid="uid://cs42ac3d2unbg" path="res://sprites/flag.png" id="6_4o7q8"]
+[ext_resource type="Texture2D" uid="uid://lqqhv7of0yyb" path="res://sprites/arrow.png" id="7_kpjit"]
 
 [sub_resource type="Shader" id="Shader_kpjit"]
 code = "shader_type canvas_item;
@@ -106,3 +107,45 @@ texture = ExtResource("6_4o7q8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flag" unique_id=471574946]
 shape = SubResource("RectangleShape2D_4kxuq")
+
+[node name="Arrows" type="Node2D" parent="." unique_id=1012494541]
+modulate = Color(1, 0, 0, 1)
+
+[node name="Arrow" type="Sprite2D" parent="Arrows" unique_id=355311677]
+position = Vector2(522, -133)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_kpjit")
+
+[node name="Arrow2" type="Sprite2D" parent="Arrows" unique_id=607588368]
+position = Vector2(4113, -365)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_kpjit")
+
+[node name="Arrow3" type="Sprite2D" parent="Arrows" unique_id=1591266424]
+position = Vector2(7543, 196)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_kpjit")
+
+[node name="Arrow4" type="Sprite2D" parent="Arrows" unique_id=342886495]
+position = Vector2(10740, 163)
+rotation = -1.3089969
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_kpjit")
+
+[node name="Arrow5" type="Sprite2D" parent="Arrows" unique_id=1872716039]
+position = Vector2(11084.999, -2800)
+rotation = -2.8797934
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_kpjit")
+
+[node name="Arrow6" type="Sprite2D" parent="Arrows" unique_id=1615848124]
+position = Vector2(7098, -2794)
+rotation = -3.1415927
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_kpjit")
+
+[node name="Arrow7" type="Sprite2D" parent="Arrows" unique_id=92319171]
+position = Vector2(2424.9998, -2800)
+rotation = -3.403392
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_kpjit")

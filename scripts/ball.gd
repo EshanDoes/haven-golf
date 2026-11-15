@@ -49,13 +49,10 @@ func _input(event):
 	if event.is_action_pressed("click") and !is_dashing and !win:
 		if left_target_raycast.get_collider() != null:
 			set_linear_velocity((left_target_raycast.get_collider().position - position).normalized() * launch_force * launch_strength)
-			print(left_target_raycast.get_collider().position.normalized())
 		elif right_target_raycast.get_collider() != null:
 			set_linear_velocity((right_target_raycast.get_collider().position - position).normalized() * launch_force * launch_strength)
-			print(right_target_raycast.get_collider().position.normalized())
 		else:
 			set_linear_velocity((position - mouse_pos) * launch_force)
-		print(linear_velocity, launch_strength)
 		apply_torque_impulse(launch_strength)
 		gravity_scale = 0.0
 		started = true
