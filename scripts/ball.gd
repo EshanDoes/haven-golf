@@ -78,7 +78,7 @@ func _on_body_entered(body: Node2D):
 			else:
 				animations.play("red")
 				score += 2
-		elif body.get_collision_layer_value(5):
+		elif body.get_collision_layer_value(5) and !win:
 			win = true
 			score_text.visible = false
 			win_text.text += str(snapped(score, 0.01))

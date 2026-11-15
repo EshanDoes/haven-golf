@@ -74,11 +74,11 @@ _data = {
 &"red": SubResource("Animation_bddyc")
 }
 
-[sub_resource type="Gradient" id="Gradient_w5iks"]
+[sub_resource type="Gradient" id="Gradient_1aes7"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mm1bc"]
-gradient = SubResource("Gradient_w5iks")
+gradient = SubResource("Gradient_1aes7")
 width = 4
 height = 4
 
@@ -119,6 +119,7 @@ libraries/ = SubResource("AnimationLibrary_p2lre")
 movie_quit_on_finish = true
 
 [node name="Dash Particles" type="CPUParticles2D" parent="." unique_id=244480909]
+show_behind_parent = true
 emitting = false
 amount = 10
 texture = SubResource("GradientTexture2D_mm1bc")

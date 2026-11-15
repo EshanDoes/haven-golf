@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cjv0quraql88e"]
 
 [ext_resource type="Script" uid="uid://b2ipbk0sxvaat" path="res://scripts/enemy.gd" id="1_dyafu"]
+[ext_resource type="Texture2D" uid="uid://cb7x0am4limi6" path="res://sprites/enemy.png" id="2_neper"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxuq"]
 size = Vector2(80, 80)
@@ -15,9 +16,23 @@ move_speed = 5.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=507285359]
 shape = SubResource("RectangleShape2D_4kxuq")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=763747676]
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(1, 0, 0, 1)
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1529249900]
+position = Vector2(1.9999998, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_neper")
+
+[node name="Eyes" type="Node2D" parent="Sprite" unique_id=772615793]
+
+[node name="Left Eye" type="Polygon2D" parent="Sprite/Eyes" unique_id=1793586679]
+position = Vector2(-63.499992, -12.5)
+scale = Vector2(0.99999994, 0.99999994)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(25, 0, 21.651, 12.5, 12.5, 21.651, 0, 25, -12.5, 21.651, -21.651, 12.5, -25, 0, -21.651, -12.5, -12.5, -21.651, 0, -25, 12.5, -21.651, 21.651, -12.5)
+uv = PackedVector2Array(25, 0, 21.651, 12.5, 12.5, 21.651, 0, 25, -12.5, 21.651, -21.651, 12.5, -25, 0, -21.651, -12.5, -12.5, -21.651, 0, -25, 12.5, -21.651, 21.651, -12.5)
+
+[node name="Right Eye" type="Polygon2D" parent="Sprite/Eyes" unique_id=1665798385]
+position = Vector2(55.999992, -12.5)
+scale = Vector2(0.99999994, 0.99999994)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(25, 0, 21.651, 12.5, 12.5, 21.651, 0, 25, -12.5, 21.651, -21.651, 12.5, -25, 0, -21.651, -12.5, -12.5, -21.651, 0, -25, 12.5, -21.651, 21.651, -12.5)
+uv = PackedVector2Array(25, 0, 21.651, 12.5, 12.5, 21.651, 0, 25, -12.5, 21.651, -21.651, 12.5, -25, 0, -21.651, -12.5, -12.5, -21.651, 0, -25, 12.5, -21.651, 21.651, -12.5)

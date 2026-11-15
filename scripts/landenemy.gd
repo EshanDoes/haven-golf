@@ -6,6 +6,12 @@ extends CharacterBody2D
 @onready var sprite = $Sprite
 var movement_direction = 1.0
 
+func _ready():
+		if move_speed * movement_direction > 0:
+			sprite.flip_h = false
+		else:
+			sprite.flip_h = true
+
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if abs($"../Ball".position - position) <= Vector2(2500, 2500):
