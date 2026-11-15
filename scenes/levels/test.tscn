@@ -17,8 +17,7 @@ tile_set = ExtResource("2_52kye")
 [node name="Ball" parent="." unique_id=987841902 instance=ExtResource("1_8153q")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=194125693]
-position = Vector2(753, -204)
-zoom = Vector2(0.5, 0.5)
+position = Vector2(305, -108)
 
 [node name="Box" type="RigidBody2D" parent="." unique_id=1295835162]
 position = Vector2(792, -254)

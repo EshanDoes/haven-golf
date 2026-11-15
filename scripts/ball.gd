@@ -19,7 +19,7 @@ func _ready():
 func _physics_process(delta):
 	# Get the position from the mouse (simple enhough)
 	mouse_pos = get_global_mouse_position()
-	launch_preview.set_point_position(1, position - mouse_pos)
+	launch_preview.set_point_position(1, (position - mouse_pos) * 1.25)
 	mouse_preview.set_point_position(1, mouse_pos - position)
 	launch_preview.rotation = -rotation
 	mouse_preview.rotation = -rotation
@@ -27,7 +27,7 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed("click") and is_on_screen:
 		# Launch the ball in a direction based off the mouse position and launch force
-		apply_central_impulse((position - mouse_pos) * launch_force)
+		apply_central_impulse((position - mouse_pos) * launch_force * Vector2(1, 1.5))
 
 
 func _on_2d_screen_entered() -> void:

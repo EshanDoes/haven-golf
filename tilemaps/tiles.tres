@@ -1,6 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://bwub0e4f8xv7l"]
 
 [ext_resource type="Texture2D" uid="uid://qoc1oxrwiup6" path="res://sprites/grass.png" id="1_3e2gs"]
+[ext_resource type="Texture2D" uid="uid://57eorvjgqtsq" path="res://sprites/water.png" id="2_oes8h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oes8h"]
 texture = ExtResource("1_3e2gs")
@@ -160,10 +161,27 @@ texture_region_size = Vector2i(32, 32)
 4:3/0/terrains_peering_bit/top_side = 0
 4:3/0/terrains_peering_bit/top_right_corner = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8bhfv"]
+texture = ExtResource("2_oes8h")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 1
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -12.840115, 16, -13.275372, 16, 16, -16, 16)
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 1
+0:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:1/0/terrains_peering_bit/top_side = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Grass"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+terrain_set_0/terrain_1/name = "Water"
+terrain_set_0/terrain_1/color = Color(0.09019608, 0.4627451, 0.7411765, 1)
 sources/0 = SubResource("TileSetAtlasSource_oes8h")
+sources/1 = SubResource("TileSetAtlasSource_8bhfv")
