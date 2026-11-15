@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bu8mjpejvhdo6"]
+
+[ext_resource type="PackedScene" uid="uid://dueespia8qve7" path="res://scenes/player_objects/ball.tscn" id="1_8153q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxuq"]
+size = Vector2(2435, 162)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mti6b"]
+size = Vector2(190, 1931)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mm1bc"]
+size = Vector2(100, 100)
+
+[node name="Level" type="Node2D" unique_id=1514511957]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=386851188]
+position = Vector2(0, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1619509579]
+position = Vector2(793.5, 56)
+shape = SubResource("RectangleShape2D_4kxuq")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=2018074630]
+position = Vector2(807, -2035)
+shape = SubResource("RectangleShape2D_4kxuq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1716099066]
+position = Vector2(-345, -989.5)
+shape = SubResource("RectangleShape2D_mti6b")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1151045949]
+position = Vector2(1915, -980)
+shape = SubResource("RectangleShape2D_mti6b")
+
+[node name="Ball" parent="." unique_id=987841902 instance=ExtResource("1_8153q")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=194125693]
+position = Vector2(753, -204)
+zoom = Vector2(0.5, 0.5)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1509680335]
+position = Vector2(792, -254)
+mass = 8.0
+
+[node name="ColorRect" type="ColorRect" parent="RigidBody2D" unique_id=1273964440]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+color = Color(0.5058824, 0.3372549, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=2110714420]
+shape = SubResource("RectangleShape2D_mm1bc")
