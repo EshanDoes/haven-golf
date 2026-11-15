@@ -11,8 +11,23 @@ radius = 32.0
 
 [node name="Ball" type="RigidBody2D" unique_id=987841902]
 physics_material_override = SubResource("PhysicsMaterial_4kxuq")
+lock_rotation = true
 script = ExtResource("1_4ttig")
 launch_force = 4.0
+
+[node name="Launch Preview" type="Line2D" parent="." unique_id=1622742435]
+points = PackedVector2Array(0, 0, 155, 106)
+width = 8.0
+default_color = Color(1, 0, 0, 1)
+end_cap_mode = 2
+sharp_limit = 0.0
+
+[node name="Mouse Preview" type="Line2D" parent="." unique_id=1216027407]
+points = PackedVector2Array(0, 0, 155, 106)
+width = 8.0
+default_color = Color(0, 1, 0, 1)
+end_cap_mode = 2
+sharp_limit = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=523630210]
 scale = Vector2(0.04, 0.04)
