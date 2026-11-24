@@ -4,20 +4,24 @@ extends RigidBody2D
 @export var launch_affecting_club = 1.0
 @onready var launch_preview = $"Launch Preview"
 @onready var mouse_preview = $"Mouse Preview"
+@onready var launch_arrow = $"Launch Preview/Point"
 @onready var spin_timer = $"Spin Timer"
 @onready var target_raycasts = $"Target Raycasts"
 @onready var left_target_raycast = $"Target Raycasts/Left Ray"
 @onready var right_target_raycast = $"Target Raycasts/Right Ray"
-@onready var dash_sprite = $"Dash Sprite"
-@onready var dash_particles = $"Dash Particles"
+@onready var spin_sprite = $"Spin Sprite"
+@onready var spin_particles = $"Spin Particles"
 @onready var score_text = $UI/Score
 @onready var win_text = $UI/Win
 @onready var animations = $Animations
 @onready var club = $Club
+@onready var spin_toggle = Global.spinToggle
+@onready var auto_spin_distance = Global.autoSpinDistance
 var started = false
 var mouse_pos = Vector2(0, 0)
 var launch_strength
-var is_dashing = false
+var is_spinning = false
+var is_hit = false
 var child_facing = 0.0
 var score = 0.0
 var win = false
@@ -35,8 +39,10 @@ func _physics_process(delta):
 	launch_strength = abs((position - mouse_pos).x) + abs((position - mouse_pos).y)
 	launch_preview.set_point_position(1, (position - mouse_pos))
 	mouse_preview.set_point_position(1, mouse_pos - position)
+	launch_arrow.position = position - mouse_pos
+	launch_arrow.rotation = child_facing + rotation +-(PI / 2)
 	target_raycasts.rotation = child_facing + (PI / 2)
-	dash_particles.rotation = child_facing - (PI / 2)
+	spin_particles.rotation = child_facing - (PI / 2)
 	launch_preview.rotation = -rotation
 	mouse_preview.rotation = -rotation
 	club.rotation = child_facing - (PI / 2)
@@ -46,7 +52,7 @@ func _physics_process(delta):
 		score_text.text = "Score: " + str(snapped(score, 0.01))
 
 func _input(event):
-	if event.is_action_pressed("click") and !is_dashing and !win:
+	if event.is_action_pressed("click") and !is_spinning and !win:
 		if left_target_raycast.get_collider() != null:
 			set_linear_velocity((left_target_raycast.get_collider().position - position).normalized() * launch_force * launch_strength)
 		elif right_target_raycast.get_collider() != null:
@@ -58,20 +64,21 @@ func _input(event):
 		started = true
 		if score == 0:
 			score = 0.01
-		if launch_strength >= 250:
-			is_dashing = true
-			dash_sprite.visible = true
-			dash_particles.emitting = true
+		if launch_strength < 350:
+			launch_strength = 350
+		is_spinning = true
+		spin_sprite.visible = true
+		spin_particles.emitting = true
 		spin_timer.start()
 
 func _on_body_entered(body: Node2D):
-	gravity_scale = 1.0
 	if body is PhysicsBody2D:
 		if body.get_collision_layer_value(4):
-			if is_dashing:
+			if is_spinning:
 				animations.play("green")
 				body.queue_free()
 				score -= 5
+				return
 			else:
 				animations.play("red")
 				score += 2
@@ -79,22 +86,24 @@ func _on_body_entered(body: Node2D):
 			win = true
 			score_text.visible = false
 			win_text.text += str(snapped(score, 0.01))
-			if score > 1:
-				win_text.text += "\nBogey x" + str(roundi(score))
-			elif score > 0:
-				win_text.text += "\nPar"
-			elif score > -1:
-				win_text.text += "\nBirdie"
-			elif score > -2:
-				win_text.text += "\nEagle"
-			elif score > -3:
-				win_text.text += "\nDouble Eagle"
-			else:
-				win_text.text += "\nCondor"
+			#if score > 1:
+				#win_text.text += "\nBogey x" + str(roundi(score))
+			#elif score > 0:
+				#win_text.text += "\nPar"
+			#elif score > -1:
+				#win_text.text += "\nBirdie"
+			#elif score > -2:
+				#win_text.text += "\nEagle"
+			#elif score > -3:
+				#win_text.text += "\nDouble Eagle"
+			#else:
+				#win_text.text += "\nCondor"
 			win_text.visible = true
+		spin_timeout()
 
-func _on_spin_timeout() -> void:
+func spin_timeout() -> void:
 	gravity_scale = 1.0
-	is_dashing = false
-	dash_sprite.visible = false
-	dash_particles.emitting = false
+	is_spinning = false
+	is_hit = false
+	spin_sprite.visible = false
+	spin_particles.emitting = false

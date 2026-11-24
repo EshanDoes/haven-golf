@@ -11,10 +11,15 @@ config_version=5
 [application]
 
 config/name="Speedrungolf"
-config/version="1.1"
+config/version="1.2"
 run/main_scene="uid://xtqrdru73ene"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0.39607844, 1, 1)
+config/icon="uid://x31lyk3l8ar7"
+
+[autoload]
+
+Global="*uid://dgejh61ucxt4k"
 
 [display]
 
@@ -24,6 +29,10 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://denbbcqp0pgm1"
 
 [input]
 
